@@ -1,9 +1,10 @@
 [general]
-name = "Tile Manager"
-description = "A simple tile manager plugin for QGIS"
+name = "Mapproxy Tile Manager"
+description = "Tile Manager for QGIS. Import all layers from the current WMTS connection"
 about = "A simple tile manager plugin for QGIS"
 version = 0.1
 qgisMinimumVersion = 3.0
 tracker = "--"
 repository = "https://github.com/bgeo-gis/tile_manager_qgis_plugin.git"
+icon = "icons/tile-manager.png"
 
