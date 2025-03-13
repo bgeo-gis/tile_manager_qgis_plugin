@@ -96,10 +96,7 @@ class MapproxyTileManager:
             crs = tile_matrix.crs
 
             # Create layer with additional parameters
-            layer_source = (
-                f"IgnoreGetFeatureInfoUrl=1&IgnoreGetMapUrl=1&contextualWMSLegend=0&crs={crs}&dpiMode=7&format=image/png&layers={layer_name}"
-                f"&styles=default&tileMatrixSet={tile_matrix_name}&tilePixelRatio=0&url={urllib.parse.quote_plus(capabilities_url)}"
-            )
+            layer_source = f"crs={crs}&format=image/png&layers={layer_name}&styles=default&tileMatrixSet={tile_matrix_name}&url={capabilities_url}"
 
             wmts_layer = QgsRasterLayer(
                 layer_source,
