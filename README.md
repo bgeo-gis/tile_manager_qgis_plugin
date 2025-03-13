@@ -8,17 +8,15 @@ Use this plugin as a support for [Mapproxy Tiling Service](https://github.com/bg
 
 In this example we'll use Mapproxy as the WMS/WMTS Server. First of all, from QGIS, create a new WMS/WMTS connection pointing to the Mapproxy URL.
 
-![image](https://github.com/user-attachments/assets/b2c055bb-99e9-46b6-8646-ee95a91eed03)
+![image](https://github.com/user-attachments/assets/616db874-ffc6-4110-b2d5-1440e1434129)
+
 
 In this example the URL is divided in:
 
 1. `https://example.com/` -> Protocol and Hostname
 2. `mapproxy/` -> Mapproxy installation
-3. `/example` -> Points to a specific Mapproxy configuration, in this case with the name 'example'.
-4. `/service?SERVICE=WMTS&REQUEST=GetCapabilities` -> Query parameters
-
-
-It's important to check the `Ignore GetMap/GetTile/GetLegendGraphic URI reported in capabilities` and `Ignore GetFeatureInfo URI reported in capabilities` checks.
+3. `project_name/` -> Points to a specific Mapproxy configuration, in this case with the name 'example'.
+4. `wmts/1.0.0/WMTSCapabilities.xml` -> Capabilities 
 
 Once the connection is created, click `Connect` and you should see all the layers for the specific Mapproxy configuration. Add a couple of layers to the project and test that you can see them correctly and Mapproxy is working fine.
 
@@ -30,7 +28,10 @@ This will connect automatically to the last WMS/WMTS connection (selected) and a
 NOTE: For a project with a large amount of layers it's possible that the process takes longer than expected or freezes QGIS for a couple of minutes.
 ````
 
-After all the layers are added, please disable the visibility of all the layers.
+After all the layers are added, please disable the visibility of all the layers by clicking on the Inventory group with `Ctrl` pressed. Remember to activate the group 'Inventory' on the layer tree again after deactivating the WMTS layers.
+
+![image](https://github.com/user-attachments/assets/b65b0432-367b-44a1-ae1f-ce6af908fdb7)
+
 
 ### QGIS Server
 
