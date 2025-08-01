@@ -42,6 +42,7 @@ class MapproxyTileManager:
 
     def run(self):
         settings = QSettings()
+
         # Check if the selected WMS connection is set
         selected = settings.value("connections/ows/items/wms/connections/selected")
         if not selected:
@@ -56,10 +57,12 @@ class MapproxyTileManager:
         capabilities_url_key = f"connections/ows/items/wms/connections/items/{selected}/url"
         username_key = f"connections/ows/items/wms/connections/items/{selected}/username"
         password_key = f"connections/ows/items/wms/connections/items/{selected}/password"
+        headers_key = f"connections/ows/items/wms/connections/items/{selected}/http-header"
 
         capabilities_url = settings.value(capabilities_url_key)
         username = settings.value(username_key)
         password = settings.value(password_key)
+        headers = settings.value(headers_key)
 
         # Ensure all values are strings
         capabilities_url = str(capabilities_url) if capabilities_url else None
@@ -73,9 +76,10 @@ class MapproxyTileManager:
         QgsMessageLog.logMessage(f"Selected WMS: {selected}", level=Qgis.Info)
         QgsMessageLog.logMessage(f"Capabilities URL: {capabilities_url}", level=Qgis.Info)
 
-        wmts = WebMapTileService(capabilities_url, username=username, password=password)
+        wmts = WebMapTileService(capabilities_url, username=username, password=password, headers=headers)
         matrix_iter = iter(wmts.tilematrixsets.keys())
         group_name = "Inventory"
+        QgsMessageLog.logMessage(wmts.serviceMetadataURL)
 
         # Remove layers from the group if it already exists readd them
         root = QgsProject.instance().layerTreeRoot()
