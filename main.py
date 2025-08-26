@@ -77,7 +77,6 @@ class MapproxyTileManager:
         QgsMessageLog.logMessage(f"Capabilities URL: {capabilities_url}", level=Qgis.Info)
 
         wmts = WebMapTileService(capabilities_url, username=username, password=password, headers=headers)
-        matrix_iter = iter(wmts.tilematrixsets.keys())
         group_name = "Inventory"
         QgsMessageLog.logMessage(wmts.serviceMetadataURL)
 
@@ -95,7 +94,9 @@ class MapproxyTileManager:
         for layer_name in wmts.contents:
             QgsMessageLog.logMessage(f"Layer: {layer_name}", level=Qgis.Info)
 
-            tile_matrix_name = next(matrix_iter)
+            layer_info = wmts.contents[layer_name]
+
+            tile_matrix_name = layer_info.tilematrixsets[0]
             tile_matrix = wmts.tilematrixsets[tile_matrix_name]
             crs = tile_matrix.crs
 
